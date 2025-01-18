@@ -118,7 +118,6 @@ section {
 }
 
 .hello__nav__wrapper {
-    
     @apply absolute z-20 top-0 left-0 bg-slate-50 w-screen h-14 shadow-lg flex justify-between md:block md:border-b-4 border-primary-blue;
 }
 
@@ -128,6 +127,21 @@ section {
 
 .hello__nav__phone {
     @apply absolute top-14 left-0 z-30 m-auto bg-slate-50 w-screen flex flex-col md:hidden max-w-6xl text-2xl font-extrabold;
+}
+
+.hello__nav__dropdown {
+    @apply bg-slate-50 md:border-b-4 md:border-primary-blue/*  border-l-4 border-r-4 */;
+    display: none;
+    position: relative;
+    z-index: 50;
+}
+
+.hello__nav__dropdown li {
+        padding: 0.5rem;
+    }
+
+.hello__nav__dropdown__show {
+    display: flex;
 }
 
 @media screen and (min-width: 767px) {

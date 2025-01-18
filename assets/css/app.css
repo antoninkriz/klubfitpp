@@ -736,6 +736,33 @@ section {
   }
 }
 
+.hello__nav__dropdown {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+
+@media (min-width: 768px) {
+  .hello__nav__dropdown {
+    border-bottom-width: 4px;
+    --tw-border-opacity: 1;
+    border-color: rgb(0 115 188 / var(--tw-border-opacity));
+  }
+}
+
+.hello__nav__dropdown {
+  display: none;
+  position: relative;
+  z-index: 50;
+}
+
+.hello__nav__dropdown li {
+  padding: 0.5rem;
+}
+
+.hello__nav__dropdown__show {
+  display: flex;
+}
+
 @media screen and (min-width: 767px) {
   .hello__nav__item__selected:after {
     --tw-bg-opacity: 1;

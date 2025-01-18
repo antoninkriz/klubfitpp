@@ -4,7 +4,44 @@
         <a class="{% if page.title == "Hlavní stránka" %} hello__nav__item__selected {% endif %}" href="/"> <img class="hello__nav__logo" src="{{ "/assets/images/logo.svg" | relative_url }}" alt="Logo FIT++"/></a>
         <span class="hello__nav__logo__filler"></span>
         {% for link in site.data.navbar %}
-        <a href={{link.url}} class="hello__nav__item {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">{{ link.title }}</a>
+        {% if link.url %}
+            <a href={{link.url}} class="hello__nav__item {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">{{ link.title }}</a>
+        {% else %}
+        <div class="hello__nav__item {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">
+        <span onclick="document.getElementById('nav-{{link.title}}-drodown').classList.toggle('hello__nav__dropdown__show');"
+              id="nav-{{link.title}}-drodown-button"
+        >
+                {{ link.title }}
+        </span>
+            <ul id="nav-{{link.title}}-drodown" class="hello__nav__dropdown">
+                {% for item in link.items %}
+                    <li>
+                        <a href={{item.url}} class="hello__nav__item {% if page.title == item.title %} hello__nav__item__selected {% endif %} ">{{ item.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <script>
+        window.addEventListener("click",
+            function(event) {
+                console.log(event.target.id)
+              if (event.target.id != 'nav-{{link.title}}-drodown-button') {
+                    console.log(event.target.matches('nav-{{link.title}}-drodown-button'))
+                var dropdown = document.getElementById("nav-{{link.title}}-drodown");
+                if (dropdown.classList.contains('hello__nav__dropdown__show')) {
+                  dropdown.classList.remove('hello__nav__dropdown__show');
+                }
+                    console.log("Removing from {{line.title}}")
+              }
+              if (event.target.id != 'nav-{{link.title}}-phone-drodown-button') {
+                var dropdown = document.getElementById("nav-{{link.title}}-phone-drodown");
+                if (dropdown.classList.contains('hello__nav__dropdown__show')) {
+                  dropdown.classList.remove('hello__nav__dropdown__show');
+                }
+              }
+            } )
+        </script>
+        {% endif %}
         <span class="hello__nav__logo__filler"></span>
         {% endfor %}
     </nav>
@@ -22,6 +59,22 @@
 </div>
 <nav class="hello__nav__phone hidden" id="nav_phone">
     {% for link in site.data.navbar %}
-    <a href={{link.url}} class="hello__nav__item   {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">{{ link.title }}</a>
+    {% if link.url %}
+        <a href={{link.url}} class="hello__nav__item   {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">{{ link.title }}</a>
+    {% else %}
+        <div class="hello__nav__item {% if page.title == link.title %} hello__nav__item__selected {% endif %} ">
+        <span onclick="document.getElementById('nav-{{link.title}}-phone-drodown').classList.toggle('hello__nav__dropdown__show');" class="{% if page.title == link.title %} hello__nav__item__selected {% endif %}"
+            id="nav-{{link.title}}-phone-drodown-button"
+        >{{ link.title }}</span>
+            <ul id="nav-{{link.title}}-phone-drodown" class="hello__nav__dropdown">
+                {% for item in link.items %}
+                    <li>
+                        <a href={{item.url}} class="hello__nav__item {% if page.title == item.title %} hello__nav__item__selected {% endif %} ">{{ item.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    {% endif %}
     {% endfor %}
 </nav>
